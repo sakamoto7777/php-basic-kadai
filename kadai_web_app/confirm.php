@@ -2,11 +2,17 @@
  // セッションを開始
  session_start();
 
-// POSTリクエストから入力データを取得
-$name = $_POST['user_name'];
-$age = $_POST['user_age'];
-$category = $_POST['category'];
-
+// POSTリクエストが送信された場合のみ処理
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['user_name'] ?? '';
+    $age = $_POST['user_age'] ?? '';
+    $category = $_POST['category'] ?? '';
+} else {
+    // POSTリクエストでない場合は空の値を設定
+    $name = '';
+    $age = '';
+    $category = '';
+}
 
 // エラーメッセージを格納する配列
 $errors = []; // 最初はエラーなし
